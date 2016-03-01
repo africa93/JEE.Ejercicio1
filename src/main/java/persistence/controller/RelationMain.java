@@ -12,9 +12,9 @@ public class RelationMain {
 		System.out.println("----------ooo----------");
 		context.getBean(UnRelatedController.class).process();
 		System.out.println("----------ooo----------");
-		/*
-		 * context.getBean(UnidirectionalOneToOneEmbeddedController.class).
-		 * process(); System.out.println("----------ooo----------");
+		context.getBean(PersonaController.class).
+		process(); System.out.println("----------ooo----------");
+		 /*
 		 * context.getBean(UnidirectionalOneToOneJoinColumnController.class).
 		 * process(); System.out.println("----------ooo----------");
 		 * context.getBean(UnidirectionalManyToOneJoinColumnController.class).
