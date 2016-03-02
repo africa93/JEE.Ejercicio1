@@ -1,17 +1,15 @@
-package persistence.entities.library;
+package persistence.library.entities;
 
-public class Author {
+public class Style {
 	private int id;
 	private String name;
-	private String surname;
-	public Author() {
-		super();
-	}
-	public Author(int id, String name, String surname) {
+	private String description;
+	public Style() {}
+	public Style(int id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.surname = surname;
+		this.description = description;
 	}
 	public int getId() {
 		return id;
@@ -19,8 +17,8 @@ public class Author {
 	public String getName() {
 		return name;
 	}
-	public String getSurname() {
-		return surname;
+	public String getDescription() {
+		return description;
 	}
 	@Override
 	public int hashCode() {
@@ -34,7 +32,12 @@ public class Author {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Author other = (Author) obj;
+		Style other = (Style) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -42,17 +45,10 @@ public class Author {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (surname == null) {
-			if (other.surname != null)
-				return false;
-		} else if (!surname.equals(other.surname))
-			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		return "Style [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
-	
-	
 }
