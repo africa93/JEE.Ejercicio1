@@ -1,26 +1,36 @@
 package persistence.library.entities;
 
+import javax.persistence.*;
+
+@Entity
 public class Author {
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
 	private String surname;
+	@Embedded
+	private Contact contact;
+	
 	public Author() {
 		super();
 	}
-	public Author(int id, String name, String surname) {
+	public Author(int id, String name, String surname, Contact contact) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
+		this.contact = contact;
 	}
-	public int getId() {
-		return id;
-	}
+	
 	public String getName() {
 		return name;
 	}
 	public String getSurname() {
 		return surname;
+	}
+	public Contact getContact(){
+		return contact;
 	}
 	@Override
 	public int hashCode() {
@@ -51,7 +61,7 @@ public class Author {
 	}
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + "]";
+		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", contact=" + contact + "]";
 	}
 	
 	

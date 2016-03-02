@@ -1,5 +1,8 @@
 package persistence.library.entities;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Contact {
 	private String email;
 	private int phone;
