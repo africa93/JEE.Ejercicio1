@@ -1,6 +1,11 @@
 package persistence.library.entities;
 
+import javax.persistence.*;
+
+@Entity
 public class Style {
+	@Id
+    @GeneratedValue
 	private int id;
 	private String name;
 	private String description;

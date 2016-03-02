@@ -11,16 +11,21 @@ public class Author {
 	private String surname;
 	@Embedded
 	private Contact contact;
+	@ManyToOne
+	@JoinColumn
+	private Style style;
+
 	
 	public Author() {
 		super();
 	}
-	public Author(int id, String name, String surname, Contact contact) {
+	public Author(int id, String name, String surname, Contact contact, Style style) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.contact = contact;
+		this.style = style;
 	}
 	
 	public String getName() {
@@ -31,6 +36,14 @@ public class Author {
 	}
 	public Contact getContact(){
 		return contact;
+	}
+	public Style getStyle(){
+		return style;
+	}
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", contact=" + contact + ", style="
+				+ style + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -45,12 +58,22 @@ public class Author {
 		if (getClass() != obj.getClass())
 			return false;
 		Author other = (Author) obj;
+		if (contact == null) {
+			if (other.contact != null)
+				return false;
+		} else if (!contact.equals(other.contact))
+			return false;
 		if (id != other.id)
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (style == null) {
+			if (other.style != null)
+				return false;
+		} else if (!style.equals(other.style))
 			return false;
 		if (surname == null) {
 			if (other.surname != null)
@@ -59,10 +82,7 @@ public class Author {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", contact=" + contact + "]";
-	}
+	
 	
 	
 }
