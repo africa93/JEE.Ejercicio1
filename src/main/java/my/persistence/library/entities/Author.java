@@ -1,4 +1,4 @@
-package persistence.library.entities;
+package my.persistence.library.entities;
 
 import javax.persistence.*;
 

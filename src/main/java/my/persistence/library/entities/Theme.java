@@ -1,20 +1,19 @@
-package persistence.library.entities;
+package my.persistence.library.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
-public class Style {
+public class Theme {
 	@Id
     @GeneratedValue
 	private int id;
 	private String name;
-	private String description;
-	public Style() {}
-	public Style(int id, String name, String description) {
-		super();
+	public Theme() {}
+	public Theme(int id, String name) {
 		this.id = id;
 		this.name = name;
-		this.description = description;
 	}
 	public int getId() {
 		return id;
@@ -22,8 +21,9 @@ public class Style {
 	public String getName() {
 		return name;
 	}
-	public String getDescription() {
-		return description;
+	@Override
+	public String toString() {
+		return "Theme [id=" + id + ", name=" + name + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -37,12 +37,7 @@ public class Style {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Style other = (Style) obj;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
+		Theme other = (Theme) obj;
 		if (id != other.id)
 			return false;
 		if (name == null) {
@@ -52,8 +47,5 @@ public class Style {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Style [id=" + id + ", name=" + name + ", description=" + description + "]";
-	}
+	
 }
