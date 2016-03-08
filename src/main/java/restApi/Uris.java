@@ -29,5 +29,11 @@ public class Uris {
     public static final String MANAGER = "/manager";
 
     public static final String ADMIN = "/admin";
+    
+    public static final String DIVISION = "/division";
+    
+    public static final String CALCULADORA2 = "/calculadora2";
+    
+    public static final String CALCULADORA3 = "/calculadora3";
 
 }
