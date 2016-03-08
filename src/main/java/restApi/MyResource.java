@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import restApi.exceptions.MalformedHeaderException;
+import restApi.exceptions.NotFoundUserIdException;
+import restApi.exceptions.UnauthorizedException;
+
 @RestController
 @RequestMapping(Uris.ADMIN)
 public class MyResource {
@@ -31,6 +35,21 @@ public class MyResource {
 			results.add(result);
 		}
 		return results;
+	}
+	@RequestMapping(value=Uris.ERRORES, method = RequestMethod.GET)
+	public double error(@RequestParam(value="dividendo", required = true) int param1,
+    		@RequestParam(value="divisor", required = true) int param2)
+			throws NotFoundUserIdException,UnauthorizedException, MalformedHeaderException{
+		if(param1==param2){
+			throw new NotFoundUserIdException("dividendo:"+param1);
+		}
+		if(param2<0){
+			throw new MalformedHeaderException("divisor" +param2);
+		}
+		if(param1<param2){
+			throw new UnauthorizedException("dividendo:"+param1);
+		}
+		return param1/param2;
 	}
 	
 }
