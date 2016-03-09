@@ -3,6 +3,7 @@ package restApi;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,6 +55,12 @@ public class MyResource {
 	}
 	
 	@RequestMapping(value=Uris.SECURITYURIS, method = RequestMethod.GET)
+	public boolean securityUriMethod(){
+		return true;
+	}
+	
+	@RequestMapping(value=Uris.SECURITYANNOTATION, method = RequestMethod.GET)
+	@PreAuthorize("hasRole('PLAYER')")
 	public boolean securityAnnotationMethod(){
 		return true;
 	}
