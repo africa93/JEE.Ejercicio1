@@ -44,6 +44,7 @@ public class MyResource {
 			throw new NotFoundUserIdException("dividendo:"+param1);
 		}
 		if(param2<0){
+			System.out.println("|||||||||||||MALFORMED" + param2+" "+ param1);
 			throw new MalformedHeaderException("divisor" +param2);
 		}
 		if(param1<param2){

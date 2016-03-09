@@ -70,7 +70,7 @@ public class MyResourceTest {
 	@Test
 	public void testErrorNotFoundUserIdException(){
 		try{
-			new RestBuilder<Double>(URL_API).path(Uris.ADMINS).path(Uris.ERRORES).param("dividendo","-1").param("divisor", "2").get().build();
+			new RestBuilder<Double>(URL_API).path(Uris.ADMIN).path(Uris.ERRORES).param("dividendo","2").param("divisor", "2").get().build();
 			fail();
 		}catch(HttpClientErrorException httpError){
 			assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
@@ -81,7 +81,7 @@ public class MyResourceTest {
 	@Test
 	public void testErrorMalformedHeaderException(){
 		try{
-			new RestBuilder<Double>(URL_API).path(Uris.ADMINS).path(Uris.ERRORES).param("dividendo","2").param("divisor", "-3").get().build();
+			new RestBuilder<Double>(URL_API).path(Uris.ADMIN).path(Uris.ERRORES).param("dividendo","2").param("divisor", "-3").get().build();
 			fail();
 		}catch(HttpClientErrorException httpError){
 			assertEquals(HttpStatus.BAD_REQUEST, httpError.getStatusCode());
@@ -93,7 +93,7 @@ public class MyResourceTest {
 	@Test
 	public void testErrorUnauthorizedException(){
 		try{
-			new RestBuilder<Double>(URL_API).path(Uris.ADMINS).path(Uris.ERRORES).param("dividendo","1").param("divisor", "2").get().build();
+			new RestBuilder<Double>(URL_API).path(Uris.ADMIN).path(Uris.ERRORES).param("dividendo","1").param("divisor", "2").get().build();
 			fail();
 		}catch(HttpClientErrorException httpError){
 			assertEquals(HttpStatus.UNAUTHORIZED, httpError.getStatusCode());
