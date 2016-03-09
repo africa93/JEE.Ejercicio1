@@ -40,6 +40,6 @@ public class Uris {
     
     public static final String ERRORES = "/errores";
     
-    public static final String SECURITYANNOTATION = "/security-annotation";
+    public static final String SECURITYURIS = "/security-uri";
 
 }

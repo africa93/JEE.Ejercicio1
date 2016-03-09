@@ -5,12 +5,15 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
 import config.TestsApiConfig;
+import persistence.daos.UserDao;
+import persistence.entities.User;
 import restApi.Uris;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,7 +23,7 @@ public class SecurityResourceFunctionalTesting {
 
     private static final String url = "http://localhost:8080/Ejercicio1.0.0.1-SNAPSHOT/api/v0";
     private static final String url1 = "http://localhost:8080/Ejercicio1.0.0.1-SNAPSHOT";
-
+  
     // private static final String url = "http://art83.etsisi.upm.es/JEE.Spring.0.0.1-SNAPSHOT/api/v0";
 
     @Test
@@ -92,7 +95,13 @@ public class SecurityResourceFunctionalTesting {
     
     @Test
     public void testPlayerOK() {
-        String response = new RestBuilder<String>(url1).path(Uris.ADMIN).path(Uris.SECURITYANNOTATION).basicAuth("u1", "123456")
+        String response = new RestBuilder<String>(url1).path(Uris.ADMIN).path(Uris.SECURITYURIS).basicAuth("u1", "123456")
+                .clazz(String.class).get().build();
+        System.out.println("INFO >>>>> " + response);
+    }
+    @Test
+    public void testPlayerBDOK() {
+        String response = new RestBuilder<String>(url1).path(Uris.ADMIN).path(Uris.SECURITYURIS).basicAuth("u2", "123456")
                 .clazz(String.class).get().build();
         System.out.println("INFO >>>>> " + response);
     }
