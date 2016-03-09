@@ -53,4 +53,10 @@ public class MyResource {
 		return param1/param2;
 	}
 	
+	@RequestMapping(value=Uris.SECURITYANNOTATION, method = RequestMethod.GET)
+	public boolean securityAnnotationMethod(){
+		return true;
+	}
+	
+	
 }

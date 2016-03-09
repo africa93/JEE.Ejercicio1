@@ -22,13 +22,17 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+
 import config.TestsApiConfig;
+import restApi.Gender;
 import restApi.Uris;
+import restApi.Wrapper;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {TestsApiConfig.class})
 public class AdminResourceFunctionalTesting {
 
-    private static final String URL_API = "http://localhost:8080/Ejercicio1.0.0.1-SNAPSHOT" + Uris.SERVLET_MAP;
+    private static final String URL_API = "http://localhost:8080/JEE.Spring.0.0.1-SNAPSHOT" + Uris.SERVLET_MAP;
 
     @Test
     public void testState() {
@@ -41,6 +45,7 @@ public class AdminResourceFunctionalTesting {
         System.out.println("Response: " + response);
         assertEquals("{\"response\":\"OK " + Uris.VERSION + "\"}", response);
     }
+
     @Test
     public void testEcho() {
         // Header
@@ -75,7 +80,7 @@ public class AdminResourceFunctionalTesting {
         Wrapper response = new RestTemplate().exchange(requestEntity, Wrapper.class).getBody();
         System.out.println(response);
     }
-    
+
     @Test
     public void testBodyStringList() {
         URI uri = UriComponentsBuilder.fromHttpUrl(URL_API).path(Uris.ADMINS).path(Uris.BODY).path(Uris.STRING_LIST).build().encode()
@@ -97,6 +102,7 @@ public class AdminResourceFunctionalTesting {
                 Wrapper[].class).getBody());
         System.out.println(response);
     }
+    
     @Test
     public void testErrorNotToken() {
         try {
@@ -152,6 +158,36 @@ public class AdminResourceFunctionalTesting {
         System.out.println("INFO >>>>> " + response);
     }
 
+    @Test
+    public void testSecurityAnnotationOk() {
+        String response = new RestBuilder<String>(URL_API).path(Uris.ADMINS).path(Uris.SECURITY).basicAuth("admin", "123456")
+                .clazz(String.class).get().build();
+        System.out.println("INFO >>>>> " + response);
+    }
 
-
+    @Test
+    public void testSecurityAnnotationForbidden() {
+        try {
+            new RestBuilder<String>(URL_API).path(Uris.ADMINS).path(Uris.SECURITY).basicAuth("user", "123456").clazz(String.class).get()
+                    .build();
+            fail();
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
+            System.out.println("ERROR >>>>> " + httpError.getMessage());
+            System.out.println("ERROR >>>>> " + httpError.getResponseBodyAsString());
+        }
+    }
+    
+    @Test
+    public void testSecurityAnnotationUnauthorized() {
+        try {
+            new RestBuilder<String>(URL_API).path(Uris.ADMINS).path(Uris.SECURITY).basicAuth("user", "kkk").clazz(String.class).get()
+                    .build();
+            fail();
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.UNAUTHORIZED, httpError.getStatusCode());
+            System.out.println("ERROR >>>>> " + httpError.getMessage());
+            System.out.println("ERROR >>>>> " + httpError.getResponseBodyAsString());
+        }
+    }
 }

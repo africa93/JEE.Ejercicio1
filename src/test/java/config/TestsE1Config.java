@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import injection.e1e2e4.MessageService;
 import injection.e1e2e4.MessageServiceMock;
 
 @Configuration

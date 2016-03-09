@@ -30,6 +30,8 @@ public class Uris {
 
     public static final String ADMIN = "/admin";
     
+    public static final String PLAYER = "/admin";
+    
     public static final String DIVISION = "/division";
     
     public static final String CALCULADORA2 = "/calculadora2";
@@ -37,5 +39,7 @@ public class Uris {
     public static final String CALCULADORA3 = "/calculadora3";
     
     public static final String ERRORES = "/errores";
+    
+    public static final String SECURITYANNOTATION = "/security-annotation";
 
 }

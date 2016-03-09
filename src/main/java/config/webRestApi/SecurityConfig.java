@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().exceptionHandling().accessDeniedHandler(null).and().authorizeRequests()
                 .antMatchers(Uris.SERVLET_MAP + Uris.ADMINS + "/**").permitAll()
                 .antMatchers(Uris.SERVLET_MAP + Uris.SECURITY + Uris.USER + "/**").authenticated()
+                .antMatchers(Uris.ADMIN + Uris.SECURITYANNOTATION).hasRole("PLAYER")
                 .antMatchers(HttpMethod.GET, Uris.SERVLET_MAP + Uris.SECURITY + Uris.ADMIN).hasRole("ADMIN")
                 .and().httpBasic();
     }

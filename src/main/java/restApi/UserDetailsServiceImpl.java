@@ -22,6 +22,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
         if ("user".equals(username)) {
             return this.userBuilder(username, "123456", "USER");
+        }else if("u1".equals(username)){
+        	return this.userBuilder(username, "123456", "PLAYER");
         } else if ("manager".equals(username)) {
             return this.userBuilder(username, "123456", "MANAGER");
         } else if ("admin".equals(username)) {
